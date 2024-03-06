@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Log your food intake here and check your past history of foods")
+    return render(request, "food/index.html")
