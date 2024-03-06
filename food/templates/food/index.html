@@ -2,4 +2,16 @@
 
 {% block body %}
     <h1>Log your food intake here and check your past history of foods</h1>
+
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %} 
+        <input type="text" name="food_name" placeholder="Food">
+        <input
+            type="datetime-local"
+            name="log-time"
+            value="2024-01-01T00:00"
+            min="2024-01-01T00:00"
+            max="2024-12-31T00:00" />
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}
