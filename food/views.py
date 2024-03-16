@@ -12,4 +12,6 @@ def index(request):
         if not new_food.name.lower() in [food.name.lower() for food in registered_foods]:
             new_food.save()
         return HttpResponseRedirect(reverse("index"))
-    return render(request, "food/index.html")
+    return render(request, "food/index.html", {
+        "registered_foods": registered_foods
+    })

@@ -5,7 +5,12 @@
 
     <form action="{% url 'index' %}" method="post">
         {% csrf_token %} 
-        <input type="text" name="food_name" placeholder="Food">
+        <input list="foods" name="food_name" placeholder="Food" id="food_name">
+        <datalist id="foods">
+            {% for food in registered_foods %}
+                <option value="{{food.name}}">
+            {% endfor %}
+        </datalist>
         <input
             type="datetime-local"
             name="log-time"
