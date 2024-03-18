@@ -7,12 +7,13 @@ from django.utils import timezone
 # Create your views here.
 def index(request):
     registered_foods = Food.objects.all()
+    print(registered_foods)
     if request.method == "POST":
         food_name = request.POST["food_name"]
         new_food = Food(name=f"{food_name}")
         if not new_food.name.lower() in [food.name.lower() for food in registered_foods]:
             new_food.save()
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("food:index"))
     
     current_datetime = timezone.now()
     current_datetime = current_datetime.strftime("%Y-%m-%dT%H:%M")

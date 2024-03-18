@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Log your food intake here and check your past history of foods</h1>
 
-    <form action="{% url 'index' %}" method="post">
+    <form action="{% url 'food:index' %}" method="post">
         {% csrf_token %} 
         <input list="foods" name="food_name" placeholder="Food" id="food_name">
         <datalist id="foods">
