@@ -18,14 +18,18 @@ def index(request):
         log_datetime_utc = log_datetime + timedelta(minutes=int(utc_offset))
         # set tzinfo to make the datetime timezone aware
         log_datetime_utc = log_datetime_utc.replace(tzinfo=timezone.utc)
-        new_food = Food(name=f"{food_name}")
+        # check if food_name already exists in db and get it if it does
+        # or create a new Food if it does not exist
+        try:
+            food = Food.objects.get(name=food_name)
+        except Food.DoesNotExist:
+            food = Food(name=food_name)
+            food.save()
         new_log = FoodLog(
             datetime=log_datetime_utc,
-            food=new_food,
+            food=food,
             user = request.user,
         )
-        if not new_food.name.lower() in [food.name.lower() for food in registered_foods]:
-            new_food.save()
         new_log.save()
         return HttpResponseRedirect(reverse("food:index"))
 
