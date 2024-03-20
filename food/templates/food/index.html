@@ -11,12 +11,22 @@
                 <option value="{{food.name}}">
             {% endfor %}
         </datalist>
+        <!-- food-log-datetime default value is set to user's local datetime
+        calculated with js-->
         <input
+            class="datetime-input"
             type="datetime-local"
-            name="log-datetime"
-            value="{{current_datetime}}"
+            name="food-log-datetime"
+            value="2000-01-01T00:00"
             min="2024-01-01T00:00"
             max="2024-12-31T00:00" />
+        <!-- the difference between user's datetime and utc datetime
+        is calculated with js and the value is updated with js-->
+        <input hidden
+            class="utc-offset"
+            name="food-log-utc-offset"
+            value = 0 />
+
         <input type="submit" value="Submit">
     </form>
 {% endblock %}
