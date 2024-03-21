@@ -29,4 +29,17 @@
 
         <input type="submit" value="Submit">
     </form>
+    <h2> Food Log History</h2>
+    <table>
+        <tr>
+            <th>Date & Time (UTC)</th>
+            <th>Food</th>
+        </tr>
+        {% for log in food_history %}
+        <tr>
+            <td>{{log.datetime}}</td>
+            <td>{{log.food}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

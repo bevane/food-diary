@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 # Create your views here.
 def index(request):
     registered_foods = Food.objects.all()
+    food_history = FoodLog.objects.filter(user=request.user)
     if request.method == "POST":
         food_name = request.POST["food_name"]
         # datetime from form is in iso format
@@ -35,4 +36,5 @@ def index(request):
 
     return render(request, "food/index.html", {
         "registered_foods": registered_foods,
+        "food_history": food_history,
     })
