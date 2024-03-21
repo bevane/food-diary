@@ -32,12 +32,12 @@
     <h2> Food Log History</h2>
     <table>
         <tr>
-            <th>Date & Time (UTC)</th>
+            <th>Date & Time</th>
             <th>Food</th>
         </tr>
         {% for log in food_history %}
         <tr>
-            <td>{{log.datetime}}</td>
+            <td class="utc-datetime">{{log.datetime|date:"c"}}</td>
             <td>{{log.food}}</td>
         </tr>
         {% endfor %}

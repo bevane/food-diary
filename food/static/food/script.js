@@ -1,8 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    const datetimes = document.querySelectorAll('.datetime-input');
-    datetimes.forEach(function (datetime) {
+    const inputDatetimes = document.querySelectorAll('.datetime-input');
+    inputDatetimes.forEach(function (datetime) {
         // getTimezoneOffset returns offset in minutes
         const UTCOffset = (new Date()).getTimezoneOffset();
         // When local datetime is converted to ISOString, the local datetime is
@@ -23,4 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const UTCOffset = (new Date()).getTimezoneOffset();
         offset.value = UTCOffset;
     });
+
+    const UTCDatetimes = document.querySelectorAll('.utc-datetime');
+    UTCDatetimes.forEach(function (datetime) {
+        datetime.innerHTML = new Date(datetime.innerHTML).toLocaleString()
+    })
 });
