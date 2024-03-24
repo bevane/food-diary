@@ -21,4 +21,4 @@ class SymptomsLog(models.Model):
     )
 
     def __str__(self):
-        return f"{self.id}: {self.food.name} logged by {self.user} on {self.datetime}"
+        return f"{self.id}: {self.symptom.name} logged by {self.user} on {self.datetime}"
