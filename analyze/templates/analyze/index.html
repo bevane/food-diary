@@ -2,4 +2,13 @@
 
 {% block body %}
     <h1>Trends in food consumption and symptoms</h1>
+    <!--data which is acquired from backend and will be passed to script to populate charts-->
+    {{ data|json_script:"chart-data" }}
+    <div>
+        <canvas id="foodsChart" width="400" height="200"></canvas>
+    </div>
+    <div>
+        <canvas id="symptomsChart" width="400" height="200"></canvas>
+    </div>
+
 {% endblock %}
