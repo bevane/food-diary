@@ -13,16 +13,22 @@ document.addEventListener('DOMContentLoaded', function() {
           data: value
         })
     }
+    // prepare dataset for the stacked line chart for Symptoms History
+    var symDataset = []
+    for (let [key, value] of Object.entries(symData[1])) {
+      symDataset.push(
+        {
+          label: key,
+          data: value
+        })
+    }
 
     // instantiation and configuration of charts displayed on analyze app, using ChartJs
     new Chart(ctxSymptoms, {
       type: 'line',
       data: {
-        datasets: [{
-            label: 'All Symptoms',
-            data: symData[1],
-        }],
-        labels: symData[0]
+        labels: symData[0],
+        datasets: symDataset,
       },
       options: {
         plugins: {
@@ -33,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         scales: {
           y: {
+            stacked: true,
             title: {
               display: true,
               text: '# of times symptoms occurred'
@@ -43,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           },
           x: {
+            stacked: true,
             title: {
               display: true,
               text: 'Date'
