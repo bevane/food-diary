@@ -14,9 +14,4 @@
     <input type="submit", value="Login">
     <input type="hidden", name="next" value="{{ next }}">
   </form>
-
-  <form action="{% url 'logout'%}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Logout">
-  </form>
 {% endblock %}
