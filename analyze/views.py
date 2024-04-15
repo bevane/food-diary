@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.db.models import Count
 from symptoms.models import Symptoms, SymptomsLog
 from food.models import Food, FoodLog
 import pandas as pd
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
     symptoms = Symptoms.objects.all()
     symptoms_history = SymptomsLog.objects.filter(user=request.user)

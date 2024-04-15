@@ -1,0 +1,15 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+  {% if request.GET.next %}
+    <h2 class="signin-message">Please sign in to continue</h2>
+  {% endif %}
+  
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <input type="text", name="username", placeholder="Username">
+    <input type="password", name="password", placeholder="Password">
+    <input type="submit", value="Login">
+    <input type="hidden", name="next" value="{{ next }}">
+  </form>
+{% endblock %}
