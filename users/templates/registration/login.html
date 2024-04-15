@@ -7,10 +7,16 @@
 		{% endfor %}
   {% endif %}
 
-  <form action="{% url 'users:login' %}" method="post">
+  <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     <input type="text", name="username", placeholder="Username">
     <input type="password", name="password", placeholder="Password">
     <input type="submit", value="Login">
+    <input type="hidden", name="next" value="{{ next }}">
+  </form>
+
+  <form action="{% url 'logout'%}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Logout">
   </form>
 {% endblock %}
