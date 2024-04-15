@@ -3,8 +3,10 @@ from django.http import  HttpResponseRedirect
 from django.urls import reverse
 from .models import Symptoms, SymptomsLog
 from datetime import datetime, timedelta, timezone
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
     registered_symptoms = Symptoms.objects.all()
     symptoms_history = SymptomsLog.objects.filter(user=request.user)

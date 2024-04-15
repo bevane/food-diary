@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Food, FoodLog
 from datetime import datetime, timedelta, timezone
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
     registered_foods = Food.objects.all()
     food_history = FoodLog.objects.filter(user=request.user)
