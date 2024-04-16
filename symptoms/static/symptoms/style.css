@@ -1,0 +1,28 @@
+.navbar {
+    padding: 10px 200px 10px 200px;
+}
+
+.main {
+    padding: 50px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.main h1 {
+    text-align: center;
+    max-width: 600px;
+}
+.main input {
+    min-width: 230px;
+}
+
+.log-table {
+    margin-top: 50px;
+    text-align: center;
+}
+
+tr {
+    text-align: left;
+}

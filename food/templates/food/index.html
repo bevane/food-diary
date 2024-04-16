@@ -1,45 +1,51 @@
 {% extends "food/layout.html" %}
 
 {% block body %}
+  <div class=main>
     <h1>Log your food intake here and check your past history of foods</h1>
 
     <form action="{% url 'food:index' %}" method="post">
-        {% csrf_token %} 
-        <input list="foods" name="food_name" placeholder="Food" id="food_name">
-        <datalist id="foods">
-            {% for food in registered_foods %}
-                <option value="{{food.name}}">
-            {% endfor %}
-        </datalist>
-        <!-- food-log-datetime default value is set to user's local datetime
-        calculated with js-->
-        <input
-            class="datetime-input"
-            type="datetime-local"
-            name="food-log-datetime"
-            value="2000-01-01T00:00"
-            min="2024-01-01T00:00"
-            max="2024-12-31T00:00" />
-        <!-- the difference between user's datetime and utc datetime
-        is calculated with js and the value is updated with js-->
-        <input hidden
-            class="utc-offset"
-            name="food-log-utc-offset"
-            value = 0 />
-
-        <input type="submit" value="Submit">
-    </form>
-    <h2> Food Log History</h2>
-    <table>
-        <tr>
-            <th>Date & Time</th>
-            <th>Food</th>
-        </tr>
-        {% for log in food_history %}
-        <tr>
-            <td class="utc-datetime">{{log.datetime|date:"c"}}</td>
-            <td>{{log.food}}</td>
-        </tr>
+      {% csrf_token %} 
+      <input list="foods" name="food_name" placeholder="Food" id="food_name">
+      <datalist id="foods">
+        {% for food in registered_foods %}
+        	<option value="{{food.name}}">
         {% endfor %}
-    </table>
+      </datalist>
+      <!-- food-log-datetime default value is set to user's local datetime
+      calculated with js-->
+      <input
+        class="datetime-input"
+        type="datetime-local"
+        name="food-log-datetime"
+        value="2000-01-01T00:00"
+        min="2024-01-01T00:00"
+        max="2024-12-31T00:00" />
+      <!-- the difference between user's datetime and utc datetime
+      is calculated with js and the value is updated with js-->
+      <input hidden
+        class="utc-offset"
+        name="food-log-utc-offset"
+        value = 0 />
+
+      <input type="submit" value="Submit">
+    </form>
+
+		<div class="log-table">
+			<h2> Food Log History</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Date & Time</th>
+					<th>Food</th>
+				</tr>
+				{% for log in food_history %}
+				<tr>
+					<td class="utc-datetime">{{log.datetime|date:"c"}}</td>
+					<td>{{log.food}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+
+	</div>
 {% endblock %}
