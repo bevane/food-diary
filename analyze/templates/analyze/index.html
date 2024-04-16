@@ -1,15 +1,20 @@
 {% extends "analyze/layout.html" %}
 
 {% block body %}
+	<div class="main">
     <h1>Trends in food consumption and symptoms</h1>
     <!--data which is acquired from backend and will be passed to script to populate charts-->
     {{ sym_data|json_script:"sym-data" }}
     {{ food_data|json_script:"food-data" }}
-    <div>
-        <canvas id="foodsChart" width="400" height="200"></canvas>
-    </div>
-    <div>
-        <canvas id="symptomsChart" width="400" height="200"></canvas>
-    </div>
+
+		<div class="charts-section">
+			<div class="chart">
+				<canvas id="foodsChart" width="400" height="200"></canvas>
+			</div>
+			<div class="chart">
+				<canvas id="symptomsChart" width="400" height="200"></canvas>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

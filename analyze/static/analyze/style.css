@@ -1,0 +1,27 @@
+.navbar {
+    padding: 10px 200px 10px 200px;
+}
+
+.main {
+    padding: 50px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.main h1 {
+    text-align: center;
+    max-width: 600px;
+}
+
+.charts-section {
+    padding: 50px;
+    display: flex;
+    gap: 80px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.chart {
+    width: 600px;
+}
