@@ -2,7 +2,9 @@
 
 {% block body %}
   {% if request.GET.next %}
+    <div class="message">
     <h2 class="signin-message">Please sign in to continue</h2>
+    </div>
   {% endif %}
   
   <form action="{% url 'login' %}" method="post">
