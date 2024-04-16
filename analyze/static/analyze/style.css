@@ -30,5 +30,5 @@
     justify-content: center;
 }
 .chart {
-    width: 600px;
+    max-width: 600px;
 }
