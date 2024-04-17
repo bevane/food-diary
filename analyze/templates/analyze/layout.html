@@ -41,6 +41,7 @@
       <form action="{% url 'logout'%}" method="post">
       {% csrf_token %}
       <input class="btn btn-outline-danger me-2" type="submit" value="Sign Out">
+      </form>
       {% endif %}
     </div>
   </nav>
