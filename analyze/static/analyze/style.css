@@ -8,7 +8,6 @@
     font-size: 12px;
 }
 
-
 .main {
     padding: 50px 100px 20px 100px;
     display: flex;
@@ -23,12 +22,15 @@
 }
 
 .charts-section {
-    padding: 50px;
     display: flex;
     gap: 80px;
     flex-wrap: wrap;
     justify-content: center;
 }
-.chart {
-    max-width: 600px;
+
+.chart-container {
+    flex: 1;
+    position: relative;
+    height: 60vh;
+    width: 45vw;
 }

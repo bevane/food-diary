@@ -6,6 +6,10 @@
     <h2 class="signin-message">Please sign in to continue</h2>
     </div>
   {% endif %}
+
+  {% if form.errors %}
+    <p>Incorrect username and/or password. Please try again.</p>
+  {% endif %}
   
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}

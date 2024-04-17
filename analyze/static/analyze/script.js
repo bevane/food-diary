@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: symDataset,
       },
       options: {
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
           datasets: foodDataset,
         },
         options: {
+          maintainAspectRatio: false,
           plugins: {
             title: {
               display: true,
