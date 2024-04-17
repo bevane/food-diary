@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctxSymptoms = document.getElementById('symptomsChart');
     const ctxFoods = document.getElementById('foodsChart')
 
+    const autocolors = window['chartjs-plugin-autocolors'];
+    Chart.register(autocolors);
+
     // prepare dataset for the stacked bar chart for Food History
     var foodDataset = []
     for (let [key, value] of Object.entries(foodData[1])) {
@@ -31,7 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: symDataset,
       },
       options: {
+        maintainAspectRatio: false,
         plugins: {
+          colorschemes: {
+                scheme: 'tableau.Tableau20'
+            },
           title: {
             display: true,
             text: 'Occurrences of Symptoms over time'
@@ -67,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
           datasets: foodDataset,
         },
         options: {
+          maintainAspectRatio: false,
           plugins: {
+            colorschemes: 'tableau.Tableau20',
             title: {
               display: true,
               text: 'Food history over time'
