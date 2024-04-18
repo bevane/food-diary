@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
       symDataset.push(
         {
           label: key,
-          data: value
+          data: value,
+          fill: true
         })
     }
 
@@ -54,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           },
           x: {
-            stacked: true,
             title: {
               display: true,
               text: 'Date'
