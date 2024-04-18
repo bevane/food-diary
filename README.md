@@ -33,9 +33,9 @@ by observing trends in the foods they eat and symptoms they experience
 1. Clone the repo
 2. cd to local repo
 3. Optional: Highly recommended to set up python virtual environment:
-    1. python3.11 -m venv .venv
-    2. source .venv/bin/activate
-4. `pip install -r requirements.txt` *recommended to set up a python virtual environment in repo directory beforehand*
+    1. `python3.11 -m venv .venv`
+    2. `source .venv/bin/activate`
+4. `pip install -r requirements.txt`
 5. `python manage.py migrate` to initialize the local db
 6. `python manage.py createsuperuser` to create an admin account for yourself
 7. `python manage.py runserver`
