@@ -7,6 +7,7 @@ Functionality:
 - Symptoms: Make symptom entries with name of symptom and timestamp
 - Analyze: Visualize trends in food consumption and symptoms on a day to day basis
 
+![webapp demo](docs/demo800x400.gif)
 # Why?
 
 Usually reactions to certain foods is very obvious (ex: allergic reactions) for many people.
