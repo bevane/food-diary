@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
       symDataset.push(
         {
           label: key,
-          data: value
+          data: value,
+          fill: true
         })
     }
 
@@ -36,9 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
       options: {
         maintainAspectRatio: false,
         plugins: {
-          colorschemes: {
-                scheme: 'tableau.Tableau20'
-            },
           title: {
             display: true,
             text: 'Occurrences of Symptoms over time'
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           },
           x: {
-            stacked: true,
             title: {
               display: true,
               text: 'Date'
@@ -76,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         options: {
           maintainAspectRatio: false,
           plugins: {
-            colorschemes: 'tableau.Tableau20',
             title: {
               display: true,
               text: 'Food history over time'
