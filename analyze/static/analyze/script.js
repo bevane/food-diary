@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
       options: {
         maintainAspectRatio: false,
         plugins: {
-          colorschemes: {
-                scheme: 'tableau.Tableau20'
-            },
           title: {
             display: true,
             text: 'Occurrences of Symptoms over time'
@@ -76,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         options: {
           maintainAspectRatio: false,
           plugins: {
-            colorschemes: 'tableau.Tableau20',
             title: {
               display: true,
               text: 'Food history over time'
