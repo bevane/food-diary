@@ -1,0 +1,36 @@
+.navbar {
+    padding: 10px 200px 10px 200px;
+}
+
+.navbar-text {
+    flex-shrink: 0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.main {
+    padding: 50px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.main h1 {
+    text-align: center;
+    max-width: 600px;
+}
+
+.charts-section {
+    display: flex;
+    gap: 80px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.chart-container {
+    flex: 1;
+    position: relative;
+    height: 60vh;
+    width: 45vw;
+}
