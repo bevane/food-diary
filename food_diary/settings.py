@@ -158,3 +158,20 @@ AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/"
+
+# Production settings
+if not DEBUG:
+    STATIC_ROOT = "/var/www/fooddiary.cc/static"
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+
+    # Additional security measures
+    SECURE_HSTS_SECONDS = 2592000
+
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+    SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
