@@ -3,7 +3,8 @@ from django.conf import settings
 
 # Create your models here.
 class Food(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=128, unique=True)
+    added_by = models.CharField(max_length=150)
 
     def __str__(self):
         return f"{self.name}"
