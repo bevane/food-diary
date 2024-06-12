@@ -1,51 +1,50 @@
 {% extends "symptoms/layout.html" %}
 
-{% block body %}
+  {% block body %}
   <div class=main>
     <h1>Log your symptoms here and check your past history of symptoms</h1>
-
     <form action="{% url 'symptoms:index' %}" method="post">
-			{% csrf_token %} 
-			<input list="symptoms" name="symptom_name" placeholder="Symptom" id="symptom_name">
-			<datalist id="symptoms">
-				{% for symptom in registered_symptoms %}
-					<option value="{{symptom.name}}">
-				{% endfor %}
-			</datalist>
-			<!-- symptom-log-datetime default value is set to user's local datetime
-			calculated with js-->
-			<input
-				class="datetime-input"
-				type="datetime-local"
-				name="symptom-log-datetime"
-				value="2000-01-01T00:00"
-				min="2024-01-01T00:00"
-				max="2024-12-31T00:00" />
-			<!-- the difference between user's datetime and utc datetime
-			is calculated with js and the value is updated with js-->
-			<input hidden
-				class="utc-offset"
-				name="symptom-log-utc-offset"
-				value = 0 />
+      {% csrf_token %}
+      <input list="symptoms" name="symptom_name" placeholder="Symptom" id="symptom_name">
+      <datalist id="symptoms">
+        {% for symptom in registered_symptoms %}
+        <option value="{{symptom.name}}">
+          {% endfor %}
+      </datalist>
+      <!-- symptom-log-datetime default value is set to user's local datetime
+      calculated with js-->
+      <input
+      class="datetime-input"
+      type="datetime-local"
+      name="symptom-log-datetime"
+      value="2000-01-01T00:00"
+      min="2024-01-01T00:00"
+      max="2024-12-31T00:00" />
+      <!-- the difference between user's datetime and utc datetime
+      is calculated with js and the value is updated with js-->
+      <input hidden
+      class="utc-offset"
+      name="symptom-log-utc-offset"
+      value = 0 />
 
-			<input type="submit" value="Submit">
+      <input type="submit" value="Submit">
     </form>
 
-		<div class="log-table">
-			<h2> Symptoms Log History</h2>
-			<table class="table table-striped">
-				<tr>
-					<th>Date & Time</th>
-					<th>Symptom</th>
-				</tr>
-				{% for log in symptoms_history %}
-				<tr>
-					<td class="utc-datetime">{{log.datetime|date:"c"}}</td>
-					<td>{{log.symptom}}</td>
-				</tr>
-				{% endfor %}
-			</table>
-		</div>
+    <div class="log-table">
+      <h2> Symptoms Log History</h2>
+      <table class="table table-striped">
+        <tr>
+          <th>Date & Time</th>
+          <th>Symptom</th>
+        </tr>
+        {% for log in symptoms_history %}
+        <tr>
+          <td class="utc-datetime">{{log.datetime|date:"c"}}</td>
+          <td>{{log.symptom}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
 
-	</div>
-{% endblock %}
+  </div>
+  {% endblock %}
