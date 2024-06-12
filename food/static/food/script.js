@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const datetimeInputField = document.querySelector('.datetime-input');
+    const availableFoods = JSON.parse(document.getElementById('registered-foods').textContent);
 
     if (!sessionStorage.getItem("lastDatetimeInput")) {
         // set datetime to now time if user launches a new session
@@ -30,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem("lastDatetimeInput", submittedDatetime)
     });
 
-   const UTCOffsetData = document.querySelectorAll('.utc-offset');
-    UTCOffsetData.forEach(function (offset) {
+    const UTCOffsetData = document.querySelectorAll('.utc-offset');
+    UTCOffsetData.forEach(function(offset) {
         // get the offset between UTC and user's local timezone
         // and set the input value of utc-offset which will be 
         // sent to backend
@@ -40,7 +41,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const UTCDatetimes = document.querySelectorAll('.utc-datetime');
-    UTCDatetimes.forEach(function (datetime) {
+    UTCDatetimes.forEach(function(datetime) {
         datetime.innerHTML = new Date(datetime.innerHTML).toLocaleString()
-    })
+    });
+
+    (function autocompleteFoods() {
+        $("#food_name").autocomplete({
+            source: function(request, response) {
+                // limit max number of results in response to prevent slowdown
+                const results = $.ui.autocomplete.filter(availableFoods, request.term);
+                // will result in exact matches at the top of the response list
+                // and lowercase above uppercase for same length of result
+                // while still allowing middle of the word searches
+                results.sort((a, b) => a.length - b.length || a.localeCompare(b));
+                response(results.slice(0, 5));
+            },
+            minLength: 3,
+        });
+    })();
 });
+

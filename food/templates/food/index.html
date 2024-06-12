@@ -5,13 +5,9 @@
     <h1>Log your food intake here and check your past history of foods</h1>
 
     <form action="{% url 'food:index' %}" method="post">
-      {% csrf_token %} 
-      <input list="foods" name="food_name" placeholder="Food" id="food_name">
-      <datalist id="foods">
-        {% for food in registered_foods %}
-        	<option value="{{food.name}}">
-        {% endfor %}
-      </datalist>
+      {% csrf_token %}
+      {{ registered_foods|json_script:"registered-foods" }}
+      <input id="food_name" name="food_name" placeholder="Food">
       <!-- food-log-datetime default value is set to user's local datetime
       calculated with js-->
       <input
@@ -30,22 +26,20 @@
 
       <input type="submit" value="Submit">
     </form>
-
-		<div class="log-table">
-			<h2> Food Log History</h2>
-			<table class="table table-striped">
-				<tr>
-					<th>Date & Time</th>
-					<th>Food</th>
-				</tr>
-				{% for log in food_history %}
-				<tr>
-					<td class="utc-datetime">{{log.datetime|date:"c"}}</td>
-					<td>{{log.food}}</td>
-				</tr>
-				{% endfor %}
-			</table>
-		</div>
-
-	</div>
+    <div class="log-table">
+      <h2> Food Log History</h2>
+      <table class="table table-striped">
+	<tr>
+	  <th>Date & Time</th>
+	  <th>Food</th>
+	</tr>
+	{% for log in food_history %}
+	<tr>
+	  <td class="utc-datetime">{{log.datetime|date:"c"}}</td>
+	  <td>{{log.food}}</td>
+	</tr>
+	{% endfor %}
+      </table>
+    </div>
+  </div>
 {% endblock %}

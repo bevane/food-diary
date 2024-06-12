@@ -4,11 +4,12 @@ from django.urls import reverse
 from .models import Food, FoodLog
 from datetime import datetime, timedelta, timezone
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 @login_required
 def index(request):
-    registered_foods = Food.objects.all()
+    registered_foods = list(Food.objects.filter(Q(added_by=request.user) | Q(added_by="admin(fdc)")).values_list("name", flat=True))
     food_history = FoodLog.objects.filter(user=request.user)
     if request.method == "POST":
         food_name = request.POST["food_name"]
