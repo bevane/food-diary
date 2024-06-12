@@ -4,11 +4,12 @@ from django.urls import reverse
 from .models import Symptoms, SymptomsLog
 from datetime import datetime, timedelta, timezone
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 @login_required
 def index(request):
-    registered_symptoms = Symptoms.objects.all()
+    registered_symptoms = list(Symptoms.objects.values_list("name", flat=True))
     symptoms_history = SymptomsLog.objects.filter(user=request.user)
     if request.method == "POST":
         symptom_name = request.POST["symptom_name"]
