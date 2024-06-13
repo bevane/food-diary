@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // getTimezoneOffset returns offset in minutes
             const UTCOffset = (new Date()).getTimezoneOffset();
             // When local datetime is converted to ISOString, the local datetime is
-            // is also converted to UTC time
-            // UTCOffset is subtracted from Date.now to offset the automatic conversion
             // to UTC time by toISOString() 
             // so that datetime.value will still show the datetime according to user's 
             // timezone while being ISO format to support the form datetime-local input
@@ -30,17 +28,34 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem("lastDatetimeInput", submittedDatetime)
     });
 
-   const UTCOffsetData = document.querySelectorAll('.utc-offset');
-    UTCOffsetData.forEach(function (offset) {
+    const UTCOffsetData = document.querySelectorAll('.utc-offset');
+    UTCOffsetData.forEach(function(offset) {
         // get the offset between UTC and user's local timezone
-        // and set the input value of utc-offset which will be 
+        // // and set the input value of utc-offset which will be 
         // sent to backend
         const UTCOffset = (new Date()).getTimezoneOffset();
         offset.value = UTCOffset;
     });
 
     const UTCDatetimes = document.querySelectorAll('.utc-datetime');
-    UTCDatetimes.forEach(function (datetime) {
+    UTCDatetimes.forEach(function(datetime) {
         datetime.innerHTML = new Date(datetime.innerHTML).toLocaleString()
-    })
+    });
+
+    (function autocompleteSymptoms() {
+        $("#symptom_name").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "autocomplete_symptoms",
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        response(data)
+                    }
+                });
+            },
+            minLength: 3,
+        });
+    })();
 });

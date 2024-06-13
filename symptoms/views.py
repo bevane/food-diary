@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from django.http import  HttpResponseRedirect
+from django.http import  HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.urls import reverse
 from .models import Symptoms, SymptomsLog
 from datetime import datetime, timedelta, timezone
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 @login_required
 def index(request):
-    registered_symptoms = Symptoms.objects.all()
     symptoms_history = SymptomsLog.objects.filter(user=request.user)
     if request.method == "POST":
         symptom_name = request.POST["symptom_name"]
@@ -26,7 +26,7 @@ def index(request):
         try:
             symptom = Symptoms.objects.get(name=symptom_name)
         except Symptoms.DoesNotExist:
-            symptom = Symptoms(name=symptom_name)
+            symptom = Symptoms(name=symptom_name, added_by=request.user.username)
             symptom.save()
         new_log = SymptomsLog(
             datetime=log_datetime_utc,
@@ -37,6 +37,36 @@ def index(request):
         return HttpResponseRedirect(reverse("symptoms:index"))
 
     return render(request, "symptoms/index.html", {
-        "registered_symptoms": registered_symptoms,
         "symptoms_history": symptoms_history,
     })
+
+
+@login_required
+def autocomplete_symptoms(request):
+    """
+    Provides autocomplete suggestions for symptom logging
+    """
+    # only allow ajax requests
+    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return HttpResponseForbidden("403 Forbidden")
+    query = request.GET.get("term", "")
+    suggested_symptoms = list(Symptoms.objects.filter(
+        (Q(added_by=request.user) | Q(added_by="admin(medlineplus)"))
+         & Q(name__icontains=query)
+    ).values("name", "added_by"))
+    # sort the suggestions so that the symptoms added by the user will always
+    # be at the top and then it will be sorted by length which will result
+    # in exact matches to the search term showing up at the top
+    sorted_suggestions = sorted(
+        suggested_symptoms, key=lambda item: (
+            # use not equals as the sort will be in asc order which means
+            # false (0) will be at the top of the list
+            item["added_by"] != request.user.username,
+            len(item["name"])
+            )
+        # truncate sorted suggestions so that only a limited number of suggestions
+        # will be shown in front end and prevent slow performance
+    )[:5]
+    sorted_suggestions_arr = [item["name"] for item in sorted_suggestions]
+    return JsonResponse(sorted_suggestions_arr, safe=False)
+

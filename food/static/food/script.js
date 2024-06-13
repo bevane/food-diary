@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem("lastDatetimeInput", submittedDatetime)
     });
 
-   const UTCOffsetData = document.querySelectorAll('.utc-offset');
-    UTCOffsetData.forEach(function (offset) {
+    const UTCOffsetData = document.querySelectorAll('.utc-offset');
+    UTCOffsetData.forEach(function(offset) {
         // get the offset between UTC and user's local timezone
         // and set the input value of utc-offset which will be 
         // sent to backend
@@ -40,7 +40,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const UTCDatetimes = document.querySelectorAll('.utc-datetime');
-    UTCDatetimes.forEach(function (datetime) {
+    UTCDatetimes.forEach(function(datetime) {
         datetime.innerHTML = new Date(datetime.innerHTML).toLocaleString()
-    })
+    });
+
+    (function autocompleteFoods() {
+        $("#food_name").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "autocomplete_foods",
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        response(data)
+                    }
+                });
+            },
+            minLength: 3,
+        });
+    })();
 });
+
