@@ -27,7 +27,7 @@ def index(request):
         try:
             food = Food.objects.get(name=food_name)
         except Food.DoesNotExist:
-            food = Food(name=food_name)
+            food = Food(name=food_name, added_by=request.user.username)
             food.save()
         new_log = FoodLog(
             datetime=log_datetime_utc,
