@@ -26,6 +26,7 @@ food_df = (food_df.query('data_type in ["branded_food", "survey_fndds_food", "fo
            .rename(columns={"description": "name"})
            # the food name constraint in webapp is 128 chars
            .query('name.str.len() <= 128')
+           .assign(name=lambda df: df["name"].str.title())
            # differentiate between data added by this script and data added by
            # users etc.
            .assign(added_by="admin(fdc)")
