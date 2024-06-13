@@ -6,7 +6,6 @@
 
     <form action="{% url 'food:index' %}" method="post">
       {% csrf_token %}
-      {{ registered_foods|json_script:"registered-foods" }}
       <input id="food_name" name="food_name" placeholder="Food">
       <!-- food-log-datetime default value is set to user's local datetime
       calculated with js-->
