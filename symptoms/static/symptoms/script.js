@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const datetimeInputField = document.querySelector('.datetime-input');
-    const availableSymptoms = JSON.parse(document.getElementById('registered-symptoms').textContent);
 
     if (!sessionStorage.getItem("lastDatetimeInput")) {
         // set datetime to now time if user launches a new session
@@ -46,13 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
     (function autocompleteSymptoms() {
         $("#symptom_name").autocomplete({
             source: function(request, response) {
-                // limit max number of results in response to prevent slowdown
-                const results = $.ui.autocomplete.filter(availableSymptoms, request.term);
-                // will result in exact matches at the top of the response list
-                // and lowercase above uppercase for same length of result
-                // while still allowing middle of the word searches
-                results.sort((a, b) => a.length - b.length || a.localeCompare(b));
-                response(results.slice(0, 5));
+                $.ajax({
+                    url: "autocomplete_symptoms",
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        response(data)
+                    }
+                });
             },
             minLength: 3,
         });

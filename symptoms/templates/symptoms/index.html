@@ -5,7 +5,6 @@
     <h1>Log your symptoms here and check your past history of symptoms</h1>
     <form action="{% url 'symptoms:index' %}" method="post">
       {% csrf_token %}
-      {{ registered_symptoms|json_script:"registered-symptoms" }}
       <input id="symptom_name" name="symptom_name" placeholder="Symptom">
       <!-- symptom-log-datetime default value is set to user's local datetime
       calculated with js-->
