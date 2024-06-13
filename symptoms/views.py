@@ -52,7 +52,7 @@ def autocomplete_symptoms(request):
     query = request.GET.get("term", "")
     suggested_symptoms = list(Symptoms.objects.filter(
         (Q(added_by=request.user) | Q(added_by="admin(medlineplus)"))
-         & Q(name__contains=query)
+         & Q(name__icontains=query)
     ).values("name", "added_by"))
     # sort the suggestions so that the symptoms added by the user will always
     # be at the top and then it will be sorted by length which will result
