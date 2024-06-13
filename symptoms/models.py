@@ -4,6 +4,7 @@ from django.conf import settings
 # Create your models here.
 class Symptoms(models.Model):
     name = models.CharField(max_length=64)
+    added_by = models.CharField(max_length=150)
 
     def __str__(self):
         return f"{self.name}"
