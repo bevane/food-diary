@@ -1,21 +1,24 @@
-{% extends "users/layout.html" %}
+{% extends "accounts/layout.html" %}
 
 {% block body %}
+<div class=main>
   {% if request.GET.next %}
-    <div class="message">
+  <div class="message">
     <h2 class="signin-message">Please sign in to continue</h2>
-    </div>
+  </div>
   {% endif %}
 
   {% if form.errors %}
-    <p>Incorrect username and/or password. Please try again.</p>
+  <p>Incorrect username and/or password. Please try again.</p>
   {% endif %}
-  
+
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     <input type="text", name="username", placeholder="Username">
     <input type="password", name="password", placeholder="Password">
     <input type="submit", value="Login">
+    <a class="btn btn-primary" href={% url 'accounts:signup' %}>Sign Up</a>
     <input type="hidden", name="next" value="{{ next }}">
   </form>
+</div>
 {% endblock %}

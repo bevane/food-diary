@@ -1,0 +1,48 @@
+.navbar {
+    padding: 10px 200px 10px 200px;
+}
+
+.navbar-text {
+    flex-shrink: 0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.hero {
+    padding: 100px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero ol {
+    margin-top: 50px;
+
+}
+
+.main {
+    padding: 50px 100px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.main form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main form input {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 250px;
+    box-sizing: border-box;
+}
+
+.main form .errorlist {
+    padding-left: 0;
+    list-style-type: none;
+    color: red;
+}

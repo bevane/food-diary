@@ -1,0 +1,12 @@
+{% extends "accounts/layout.html" %}
+
+{% block body %}
+<div class=main>
+  <h2>Create account</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Sign Up">
+  </form>
+</div>
+{% endblock %}
