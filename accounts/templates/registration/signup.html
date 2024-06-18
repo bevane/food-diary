@@ -2,16 +2,11 @@
 
 {% block body %}
 <div class=main>
-  {% if form.errors %}
-  <p>Incorrect username and/or password. Please try again.</p>
-  {% endif %}
-
-  <form action="{% url 'signup' %}" method="post">
+  <h2>Create account</h2>
+  <form method="post">
     {% csrf_token %}
-    <input type="text", name="username", placeholder="Username">
-    <input type="password", name="password", placeholder="Password">
-    <input type="submit", value="Singup">
-    <input type="hidden", name="next" value="{{ next }}">
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Sign Up">
   </form>
 </div>
 {% endblock %}

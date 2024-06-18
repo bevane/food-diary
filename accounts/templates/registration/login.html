@@ -17,6 +17,7 @@
     <input type="text", name="username", placeholder="Username">
     <input type="password", name="password", placeholder="Password">
     <input type="submit", value="Login">
+    <a class="btn btn-primary" href={% url 'accounts:signup' %}>Sign Up</a>
     <input type="hidden", name="next" value="{{ next }}">
   </form>
 </div>
