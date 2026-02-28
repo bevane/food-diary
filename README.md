@@ -32,15 +32,12 @@ by observing trends in the foods they eat and symptoms they experience
 
 1. Clone the repo
 2. cd to local repo
-3. Optional: Highly recommended to set up python virtual environment:
-    1. `python3.11 -m venv .venv`
-    2. `source .venv/bin/activate`
-4. `pip install -r requirements.txt`
-5. `python manage.py migrate` to initialize the local db
-6. `python manage.py createsuperuser` to create an admin account for yourself
-7. `python manage.py runserver`
-8. Once the server is running, open the domain provided (default: http://127.0.0.1:8000/). Sign in with superuser credentials to begin using the app
-9. Currently, creation of additional user accounts can only be done by the admin: go to users in the admin page (http://127.0.0.1:8000/admin) and click add user
+3. create .env file with `ALLOWED_HOSTS='127.0.0.1'`
+4. `uv run manage.py migrate` to initialize the local db
+5. `uv run manage.py createsuperuser` to create an admin account for yourself
+6. `uv run manage.py runserver`
+7. Once the server is running, open the domain provided (default: http://127.0.0.1:8000/). Sign in with superuser credentials to begin using the app
+8. Currently, creation of additional user accounts can only be done by the admin: go to users in the admin page (http://127.0.0.1:8000/admin) and click add user
  
 # Contribution
 As this is a personal project of mine, I am not accepting any contributions at the moment. Though, feel free to fork the repo and try it out. Also I would be glad to receive any constructive criticism and feedback
