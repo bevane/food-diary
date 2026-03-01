@@ -52,5 +52,5 @@ jobs:
             docker pull bevane50/food-diary
             docker stop food-diary
             docker rm food-diary
-            docker run --name food-diary -d --env-file=".env.docker.fd" -p 7009:8000  -v /static_fd:/app/static bevane50/food-diary
+            docker run --name food-diary -d --env-file=".env.docker.fd" -p 7009:8000  -v /static_fd:/app/static -v fd_data:/app/data bevane50/food-diary
             docker image prune
